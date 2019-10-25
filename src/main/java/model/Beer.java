@@ -42,6 +42,6 @@ public class Beer {
 	
 	@Override
 	public String toString() {
-		return MessageFormat.format("{0};{1};{2};{3};",id, name, description, styleId);
+		return MessageFormat.format("{0};{1};{2};{3};", id, name, description, styleId);
 	}
 }
