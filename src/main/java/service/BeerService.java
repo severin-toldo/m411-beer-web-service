@@ -1,7 +1,12 @@
 package main.java.service;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+import main.java.model.Beer;
 import main.java.model.Constants;
 
 public class BeerService {
@@ -22,14 +27,29 @@ public class BeerService {
 //		diese Bierart. Parsen Sie von allen Bieren die ″id″, ″name″ und ″description″ 
 //		Werte und speichern Sie diese in einer weiteren HashMap Ihrer ″BeerAdmin″ Klasse.
 	
+	public List<Beer> getBeers() {
+		return null;
+	}
 	
+	public List<Beer> getBeer(String id) {
+		return null;
+	}
 	
+	public List<Beer> getBeers(Integer styleId) {
+		return null;
+	}
 	
+	public List<Beer> getBeers(String id, Integer styleId) {
+		return null;
+	}
 	
+	public Map<Integer, String> getBeerStyles() {
+		return null;
+	}
 	
-	
-	
-	
+	public Map<Integer, String> getBeerStyles(String searchString) {
+		return null;
+	}
 	
 	
 	
@@ -44,7 +64,7 @@ public class BeerService {
 //	welche die Zeichenfolge ″search″ im Namen enthalten. Die ″id″ soll jeweils mit ″::″ getrennt vor Namen der 
 //	Bierart ausgegeben werden.
 //
-
+	
 //	@Consumes List<Beer>
 //	@Produces Syso
 //	printBeerList(): gibt zeilenweise ID und Name der Biere im lokalen Speicher aus.
@@ -53,4 +73,12 @@ public class BeerService {
 //	@Produces Syso
 //	printBeer(String id): gibt in einer Zeile ID und Namen und in einer zweiten 
 //		Zeile die Beschreibung (″description″) des entsprechenden Bieres aus dem lokalen Speicher aus.
+	
+	
+	
+	
+	
+	
+	
+
 }

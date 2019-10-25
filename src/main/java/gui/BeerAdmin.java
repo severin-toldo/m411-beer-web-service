@@ -12,7 +12,7 @@ public class BeerAdmin {
 //	welche die Zeichenfolge ″search″ im Namen enthalten. Die ″id″ soll jeweils mit ″::″ getrennt vor Namen der 
 //	Bierart ausgegeben werden.
 //
-
+	
 //	@Consumes List<Beer>
 //	@Produces Syso
 //	printBeerList(): gibt zeilenweise ID und Name der Biere im lokalen Speicher aus.

@@ -8,25 +8,23 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Map;
 
 import main.java.model.Constants;
 
 public class ApiService {
-	public String getBeerSytles() {
-		return sendGetRequest(Constants.BEER_STYLE_URL);
-	}
-	
-	private String sendGetRequest(String urlString) {
+	private String sendGetRequest(String urlString, Map<String, Object> queryParams) {
 		HttpURLConnection con = null;
 		String response = null;
 		String responseCode = null;
-		String finalUrl = null;
+		String finalUrl = urlString; // null
 		
 		try {
-			finalUrl = Constants.API_BASE_URL + urlString + "?key=" + URLEncoder.encode(Constants.API_KEY, "UTF-8");
-			con = (HttpURLConnection) new URL(finalUrl).openConnection();
+//			finalUrl = Constants.API_BASE_URL + urlString + "?key=" + URLEncoder.encode(Constants.API_KEY, "UTF-8");
+			con = (HttpURLConnection) new URL(urlString).openConnection();
 			con.setRequestMethod("GET");
-			con.setRequestProperty("key", Constants.API_KEY);
+			addQueryParams(con, queryParams);
+			
 			response = getResponseAsJson(con.getInputStream());
 			responseCode = "" + con.getResponseCode();
 		} catch (MalformedURLException mfue) {
@@ -51,5 +49,15 @@ public class ApiService {
 		in.close();
 		
 		return response.toString();
+	}
+	
+	private void addQueryParams(HttpURLConnection con, Map<String, Object> queryParams) {
+		con.setRequestProperty("key", Constants.API_KEY);
+		
+		if (queryParams != null) {
+			for (String key : queryParams.keySet()) {
+				con.setRequestProperty(key, queryParams.get(key).toString());
+			}	
+		}
 	}
 }
