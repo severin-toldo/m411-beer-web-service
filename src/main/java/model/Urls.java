@@ -1,13 +1,13 @@
 package main.java.model;
 
-public enum Url {
+public enum Urls {
 	BEER_URL("beers"),
 	STYLES_URL("styles");
 	
 	private String value;
 
-	private Url(String value) {
-		this.value = Constants.API_BASE_URL + value;
+	private Urls(String value) {
+		this.value = value;
 	}
 
 	public String getValue() {

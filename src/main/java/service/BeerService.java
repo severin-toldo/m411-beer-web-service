@@ -1,84 +1,89 @@
 package main.java.service;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import main.java.model.Beer;
-import main.java.model.Constants;
+import main.java.model.Urls;
 
 public class BeerService {
 	private ApiService apiService = new ApiService();
+
 	
-//	@Produces HashMap<Integer, String>
-//	loadBeerStyles(): Die Bierarten können über die URL ″http://api.brewerydb.com/v2/styles/?″ +apiKey 
-//	abgerufen werden. Speichern Sie für jede Bierart das Attribut ″id″ als Schlüssel, das Attribut ″name″ 
-//	als Wert in einer Klassenvariable vom Typ HashMap.
-	
-//	@Consumes HashMap<Integer, String>
-//	@Produces List<Beer>
-//	getBeerListForStyle(int idStyle):  Über den folgenden Link liefert BreweryDB einen 
-//	JSON Array der Biere mit der StyleId 5 (Extra Special Bitter):
-//	http://api.brewerydb.com/v2/beers/?key=1511d0db4a1d6841481c672455358cff&styleId=5
-//
-//	Die JSON Serverantwort enthält unter dem Namen ″data″ eine Liste der Biere für 
-//		diese Bierart. Parsen Sie von allen Bieren die ″id″, ″name″ und ″description″ 
-//		Werte und speichern Sie diese in einer weiteren HashMap Ihrer ″BeerAdmin″ Klasse.
-	
+	// printBeerList()
 	public List<Beer> getBeers() {
-		return null;
+		return getBeers(null, null);
 	}
 	
-	public List<Beer> getBeer(String id) {
-		return null;
+	// printBeer()
+	public Beer getBeerById(String id) {
+		return getBeers(id, null).get(0);
 	}
 	
-	public List<Beer> getBeers(Integer styleId) {
-		return null;
+	// getBeerListForStyle()
+	public List<Beer> getBeersByStyleId(Integer styleId) {
+		return getBeers(null, styleId);
 	}
 	
-	public List<Beer> getBeers(String id, Integer styleId) {
-		return null;
-	}
-	
-	public Map<Integer, String> getBeerStyles() {
-		return null;
-	}
-	
+	// printBeerStyles
 	public Map<Integer, String> getBeerStyles(String searchString) {
+		// TODO filter
+		return getBeerStyles();
+	}
+	
+	// printBeerStyles
+	public Map<Integer, String> getBeerStyles() {
+		String jsonResponse = apiService.sendGetRequest(Urls.STYLES_URL.getValue(), null);
+		return jsonToStylesMap(jsonResponse);
+	}
+	
+	private List<Beer> getBeers(String id, Integer styleId) {
+		Map<String, Object> queryParams = new HashMap<>();
+		
+		if (id != null) {
+			queryParams.put("id", id);	
+		}
+		
+		if (styleId != null) {
+			queryParams.put("styleId", styleId);
+		}
+		
+		String jsonResponse = apiService.sendGetRequest(Urls.BEER_URL.getValue(), queryParams);
+		return jsonToBeerList(jsonResponse);
+	}
+	
+	private List<Beer> jsonToBeerList(String jsonString) {
+		try {
+			ObjectMapper objectMapper = new ObjectMapper();
+			JsonNode root = objectMapper.readTree(jsonString);
+			String dataJson = objectMapper.writeValueAsString(root.get("data"));
+			return objectMapper.readValue(dataJson, new TypeReference<List<Beer>>(){});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return null;
 	}
 	
-	
-	
-//	@Consumes HashMap<Integer, String>
-//	@Produces Syso
-//	printBeerStyles(): Erzeugt Konsolenausgabe der Bierarten. Die ″id″ soll jeweils mit ″::″ 
-//	getrennt vor Namen der Bierart ausgegeben werden.
-//		  
-//	@Consumes HashMap<Integer, String>
-//	@Produces Syso
-//	printBeerStyles(String search): Erzeugt Konsolenausgabe der Bierarten, 
-//	welche die Zeichenfolge ″search″ im Namen enthalten. Die ″id″ soll jeweils mit ″::″ getrennt vor Namen der 
-//	Bierart ausgegeben werden.
-//
-	
-//	@Consumes List<Beer>
-//	@Produces Syso
-//	printBeerList(): gibt zeilenweise ID und Name der Biere im lokalen Speicher aus.
-
-//	@Consumes HashMap<Integer, String>
-//	@Produces Syso
-//	printBeer(String id): gibt in einer Zeile ID und Namen und in einer zweiten 
-//		Zeile die Beschreibung (″description″) des entsprechenden Bieres aus dem lokalen Speicher aus.
-	
-	
-	
-	
-	
-	
-	
-
+	private Map<Integer, String> jsonToStylesMap(String jsonString) {
+		Map<Integer, String> styles = new HashMap<>();
+		
+		JSONObject root = new JSONObject(jsonString);
+		// JSONArray jsonArray = (JSONArray) new JSONTokener(jsonString).nextValue();
+		JSONArray data = root.getJSONArray("data");
+		
+		for (int i = 0; i < data.length(); i++) {
+			JSONObject jsonObject = data.getJSONObject(i);
+			styles.put(jsonObject.getInt("id"), jsonObject.getString("name"));
+		}
+		
+		return styles;
+	}
 }

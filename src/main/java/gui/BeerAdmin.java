@@ -1,9 +1,21 @@
 package main.java.gui;
 
+import main.java.service.BeerService;
+
 public class BeerAdmin {
+	private BeerService beerService = new BeerService();
 
     public static void main(String[] args){
-        System.out.println("Ausgabe aus der main()-Methode");
+    	BeerAdmin ba = new BeerAdmin();
+    	ba.test();
+    }
+    
+    public void test() {
+    	beerService.getBeerById("abc");
+//    	beerService.getBeers();
+//    	beerService.getBeersByStyleId(1);
+//    	beerService.getBeerStyles();
+//    	beerService.getBeerStyles("Ale");
     }
 
     //	@Consumes HashMap<Integer, String>
@@ -21,9 +33,6 @@ public class BeerAdmin {
 //	Bierart ausgegeben werden.
 //
 
-    public void prinBeerStyles(String) {
-
-    }
 
 //	@Consumes List<Beer>
 //	@Produces Syso

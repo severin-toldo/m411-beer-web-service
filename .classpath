@@ -6,5 +6,12 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/Users/stoldo/git/m411-beer-web-service/src/main/resources/lib/jackson-annotations-2.9.0.jar"/>
+	<classpathentry kind="lib" path="/Users/stoldo/git/m411-beer-web-service/src/main/resources/lib/jackson-core-2.9.8.jar"/>
+	<classpathentry kind="lib" path="/Users/stoldo/git/m411-beer-web-service/src/main/resources/lib/jackson-databind-2.9.8.jar"/>
+	<classpathentry kind="lib" path="/Users/stoldo/git/m411-beer-web-service/src/main/resources/lib/jersey-client-1.19.1.jar"/>
+	<classpathentry kind="lib" path="/Users/stoldo/git/m411-beer-web-service/src/main/resources/lib/jersey-core-1.19.1.jar"/>
+	<classpathentry kind="lib" path="/Users/stoldo/git/m411-beer-web-service/src/main/resources/lib/json-20190722.jar"/>
+	<classpathentry kind="lib" path="/Users/stoldo/git/m411-beer-web-service/src/main/resources/lib/jsr311-api-1.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
