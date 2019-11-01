@@ -36,7 +36,7 @@ public class Beer {
 		return this.styleId;
 	}
 	
-	public void setStyleId(int styleId) {
+	public void setStyleId(Integer styleId) {
 		this.styleId = styleId;
 	}
 	
