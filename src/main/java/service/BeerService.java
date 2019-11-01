@@ -21,24 +21,18 @@ import main.java.model.Constants;
 import main.java.model.Urls;
 
 public class BeerService {
-	private Object lock;
-	
-	// printBeerList()
 	public List<Beer> getBeers() {
 		return getBeers(null, null);
 	}
 	
-	// printBeer()
 	public Beer getBeerById(String id) {
 		return getBeers(id, null).get(0);
 	}
 	
-	// getBeerListForStyle()
 	public List<Beer> getBeersByStyleId(Integer styleId) {
 		return getBeers(null, styleId);
 	}
 	
-	// printBeerStyles
 	public Map<Integer, String> getBeerStylesBySearchStr(String searchString) {
 		return getBeerStyles()
 				.entrySet()
@@ -47,7 +41,6 @@ public class BeerService {
 				.collect(Collectors.toMap(x -> x.getKey(), x -> x.getValue()));
 	}
 	
-	// printBeerStyles
 	public Map<Integer, String> getBeerStyles() {
 		String jsonResponse = sendGetRequest(Urls.STYLES_URL.getValue(), null);
 		return jsonToStylesMap(jsonResponse);
@@ -91,7 +84,6 @@ public class BeerService {
 		Map<Integer, String> styles = new HashMap<>();
 		
 		JSONObject root = new JSONObject(jsonString);
-		// JSONArray jsonArray = (JSONArray) new JSONTokener(jsonString).nextValue();
 		JSONArray data = root.getJSONArray("data");
 		
 		for (int i = 0; i < data.length(); i++) {
@@ -103,11 +95,6 @@ public class BeerService {
 	}
 	
 	private synchronized String sendGetRequest(String path, MultivaluedMap<String, String> queryParams) {
-//		synchronized (lock) {
-//			
-//		}
-		
-		
 		WebResource resource = Client.create().resource(Constants.API_BASE_URL);
 		ClientResponse response = resource
 				.path(path)

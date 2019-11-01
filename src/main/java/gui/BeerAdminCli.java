@@ -1,53 +1,62 @@
 package main.java.gui;
 
 import main.java.service.BeerService;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import main.java.model.Beer;
 
 public class BeerAdminCli {
 	private BeerService beerService = new BeerService();
 
 	
-    public static void main(String[] args) {
-        BeerAdminCli admin = new BeerAdminCli();
-        
-        int decision = 0;
-        
-        do {
-        	System.err.println("Bitte Option auswählen");
+    public static void main(String[] args) throws IOException {
+    	boolean stop = false;
+    	
+    	while (!stop) {
+    		System.err.println("Bitte Option auswählen");
         	System.err.println("1: Alle Styles ausgeben");
         	System.err.println("2: Styles durchsuchen");
         	System.err.println("3: Alle Biere ausgeben");
         	System.err.println("4: Beer mit bestimmter id ausgeben");
         	System.err.println("0: Ende");
+            
+        	BeerAdminCli admin = new BeerAdminCli();
+        	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         	
-        	Scanner sc = new Scanner();
+        	String decision = reader.readLine();
         	
-        	if ()
-        	
-        	
-        	
-        } while (decision != 0);
-        
-       
-        
-        
-        
-        
-        
-        
-        
-//        
-        System.err.println("printBeerStyles");
-        admin.printBeerStyles();
-        
-        System.err.println("printBeerStyles");
-        admin.printBeerStyles("Ale");
-        
-        System.err.println("printBeerList");
-        admin.printBeerList();
-        
-        System.err.println("printBeer");
-        admin.printBeer("c4f2KE");
+    		switch (decision) {
+    			case "1":
+    		        admin.printBeerStyles();
+    				break;
+    			
+    			case "2":
+    				System.err.println("Bitte Suchwort eingeben: ");
+    				admin.printBeerStyles(reader.readLine());
+    				break;
+    				
+    			case "3":
+    		        admin.printBeerList();
+    				break;
+    				
+    			case "4":
+    				System.err.println("Bitte id eingeben: ");
+    		        admin.printBeer(reader.readLine());
+    				break;
+    			
+    			case "0":
+    				System.err.println("Ok, good bye");
+    		        stop = true;
+    				break;
+
+    			default:
+    				System.err.println("Keine Gültige eingabe!");	
+    				break;
+    		}	
+    	}
     }
 
     public void printBeerStyles() {
