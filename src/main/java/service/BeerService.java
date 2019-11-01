@@ -30,10 +30,16 @@ public class BeerService {
 	
 	/**
 	 * @param id Id des gewünschten Bieres (z.B. c4f2KE)
-	 * @return Bier mit bestimmter id
+	 * @return Bier mit bestimmter id, kann null sein
 	 * */
 	public Beer getBeerById(String id) {
-		return getBeers(id, null).get(0);
+		List<Beer> beers = getBeers(id, null);
+		
+		if (beers.size() > 1) {
+			return null;
+		} else {
+			return beers.get(0);
+		}
 	}
 	
 	/**

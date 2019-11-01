@@ -96,7 +96,12 @@ public class BeerAdminCli {
      * */
     public void printBeer(String id) {
         Beer beer = beerService.getBeerById(id);
-        System.out.println(beer.getId() + "::" + beer.getName());
-        System.out.println(beer.getDescription());
+        
+        if (beer != null) {
+        	System.out.println(beer.getId() + "::" + beer.getName());
+            System.out.println(beer.getDescription());	
+        } else {
+        	System.out.println("Kein Bier mit id " + id + " gefunden.");
+        }
     }
 }
