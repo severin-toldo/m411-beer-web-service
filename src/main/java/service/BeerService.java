@@ -80,7 +80,7 @@ public class BeerService {
 		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
 		
 		if (id != null) {
-			queryParams.add("id", id);
+			queryParams.add("ids", id);
 		}
 		
 		if (styleId != null) {
