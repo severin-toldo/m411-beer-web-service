@@ -21,18 +21,34 @@ import main.java.model.Constants;
 import main.java.model.Urls;
 
 public class BeerService {
+	/**
+	 * @return Liste aller Biere der API zurück
+	 * */
 	public List<Beer> getBeers() {
 		return getBeers(null, null);
 	}
 	
+	/**
+	 * @param id Id des gewünschten Bieres (z.B. c4f2KE)
+	 * @return Bier mit bestimmter id
+	 * */
 	public Beer getBeerById(String id) {
 		return getBeers(id, null).get(0);
 	}
 	
+	/**
+	 * @param styleId Bierart id
+	 * @return Liste aller Biere mit bestimmter styleId (z.B. 5)
+	 * 
+	 * */
 	public List<Beer> getBeersByStyleId(Integer styleId) {
 		return getBeers(null, styleId);
 	}
 	
+	/**
+	 * @param searchString String nachdem die Bierarten durchsucht werden sollen (z.B. "Ale")
+	 * @return Map der Gefunden Bierarten, Id = key, name = value
+	 * */
 	public Map<Integer, String> getBeerStylesBySearchStr(String searchString) {
 		return getBeerStyles()
 				.entrySet()
@@ -41,11 +57,19 @@ public class BeerService {
 				.collect(Collectors.toMap(x -> x.getKey(), x -> x.getValue()));
 	}
 	
+	/**
+	 * @return Liste aller Bierarten (Styles) als map. Id = key, name = value
+	 * */
 	public Map<Integer, String> getBeerStyles() {
 		String jsonResponse = sendGetRequest(Urls.STYLES_URL.getValue(), null);
 		return jsonToStylesMap(jsonResponse);
 	}
 	
+	/**
+	 * @param id Bier id, kann null sein
+	 * @param styleId Bierart id, kann null sein
+	 * @return Lister aller gefunden Biere. Diese kann je nach mitgegeben parametern varieren.
+	 * */
 	private List<Beer> getBeers(String id, Integer styleId) {
 		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
 		
@@ -61,6 +85,11 @@ public class BeerService {
 		return jsonToBeerList(jsonResponse);
 	}
 	
+	/**
+	 * Konvertiert den json String zu einer Liste von Bier Objekten.
+	 * @param Bier json
+	 * @return Konvertierte Liste
+	 * */
 	private List<Beer> jsonToBeerList(String jsonString) {
 		List<Beer> beers = new ArrayList<>();
 		
@@ -80,6 +109,11 @@ public class BeerService {
 		return beers;
 	}
 	
+	/**
+	 * Konvertier den json String zu einer Bierarten map. Key = id, value = name
+	 * @param Bierarten json
+	 * @return Konvertierte Map
+	 * */
 	private Map<Integer, String> jsonToStylesMap(String jsonString) {
 		Map<Integer, String> styles = new HashMap<>();
 		
@@ -94,6 +128,13 @@ public class BeerService {
 		return styles;
 	}
 	
+	// TODO implement callback
+	/**
+	 * @param path API Pfad (z.B. /beers)
+	 * @param queryParams Optionale query params für den Aufruf (z.B. styleId=5), können null sein
+	 * @return json string der API response
+	 * @throws IllegalStateException falls die API etwas anderes als 200 Status code zurück gibt.
+	 * */
 	private synchronized String sendGetRequest(String path, MultivaluedMap<String, String> queryParams) {
 		WebResource resource = Client.create().resource(Constants.API_BASE_URL);
 		ClientResponse response = resource
