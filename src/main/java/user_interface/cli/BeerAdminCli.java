@@ -1,4 +1,4 @@
-package main.java.gui;
+package main.java.user_interface.cli;
 
 import main.java.service.BeerService;
 

@@ -1,4 +1,4 @@
-package main.java.gui;
+package main.java.user_interface.gui;
 
 import main.java.model.Beer;
 import main.java.service.BeerService;
@@ -10,7 +10,7 @@ import java.util.Enumeration;
 
 public class BeerForm {
     public JPanel mainPanel;
-    private JList list1;
+    private JList<String> list1;
     private JButton mainButton;
     private JRadioButton radioButtonAllStyles;
     private JRadioButton radioButtonStyle;
@@ -39,7 +39,7 @@ public class BeerForm {
                     }
                 }
 
-                DefaultListModel list = ((DefaultListModel)list1.getModel());
+                DefaultListModel<String> list = ((DefaultListModel<String>)list1.getModel());
                 list.clear();
                 if(selectedButton == radioButtonAllStyles){
                     beerService.getBeerStyles()

@@ -1,15 +1,8 @@
-package main.java.gui;
-
-import main.java.service.BeerService;
-import main.java.model.Beer;
+package main.java.user_interface.gui;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.HashMap;
 
-public class BeerAdmin {
-	private BeerService beerService = new BeerService();
-
+public class BeerAdminGui {
     public static void main(String[] args) {
         BeerForm form = new BeerForm();
         JFrame frame = new JFrame();
