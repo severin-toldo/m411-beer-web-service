@@ -45,7 +45,6 @@ public class BeerService {
 	/**
 	 * @param styleId Bierart id
 	 * @return Liste aller Biere mit bestimmter styleId (z.B. 5)
-	 * 
 	 * */
 	public List<Beer> getBeersByStyleId(Integer styleId) {
 		return getBeers(null, styleId);

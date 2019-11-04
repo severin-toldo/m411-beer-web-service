@@ -15,17 +15,22 @@ public class BeerAdminCli {
 	
     public static void main(String[] args) throws IOException {
     	boolean stop = false;
+    	BeerAdminCli admin = new BeerAdminCli();
+    	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     	
     	while (!stop) {
-    		System.err.println("Bitte Option auswählen");
-        	System.err.println("1: Alle Styles ausgeben");
-        	System.err.println("2: Styles durchsuchen");
-        	System.err.println("3: Alle Biere ausgeben");
-        	System.err.println("4: Beer mit bestimmter id ausgeben");
-        	System.err.println("0: Ende");
-            
-        	BeerAdminCli admin = new BeerAdminCli();
-        	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    		System.out.println();
+    		System.out.println();
+    		System.out.println();
+    		System.out.println("Bitte Option auswählen");
+        	System.out.println("1: Alle Styles ausgeben");
+        	System.out.println("2: Styles durchsuchen");
+        	System.out.println("3: Alle Biere ausgeben");
+        	System.out.println("4: Beer mit bestimmter id ausgeben");
+        	System.out.println("0: Ende");
+        	System.out.println();
+        	System.out.println();
+        	System.out.println();
         	
         	String decision = reader.readLine();
         	
@@ -35,7 +40,7 @@ public class BeerAdminCli {
     				break;
     			
     			case "2":
-    				System.err.println("Bitte Suchwort eingeben: ");
+    				System.out.println("Bitte Suchwort eingeben: ");
     				admin.printBeerStyles(reader.readLine());
     				break;
     				
@@ -44,17 +49,17 @@ public class BeerAdminCli {
     				break;
     				
     			case "4":
-    				System.err.println("Bitte id eingeben: ");
+    				System.out.println("Bitte id eingeben: ");
     		        admin.printBeer(reader.readLine());
     				break;
     			
     			case "0":
-    				System.err.println("Ok, good bye");
+    				System.out.println("Ok, good bye");
     		        stop = true;
     				break;
 
     			default:
-    				System.err.println("Keine Gültige eingabe!");	
+    				System.out.println("Keine Gültige eingabe!");	
     				break;
     		}	
     	}
