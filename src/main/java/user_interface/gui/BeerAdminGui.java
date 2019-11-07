@@ -11,5 +11,4 @@ public class BeerAdminGui {
         frame.pack();
         frame.setVisible(true);
     }
-
 }
