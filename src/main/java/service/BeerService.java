@@ -35,10 +35,10 @@ public class BeerService {
 	public Beer getBeerById(String id) {
 		List<Beer> beers = getBeers(id, null);
 		
-		if (beers.size() > 1) {
-			return null;
-		} else {
+		if (beers.size() == 1) {
 			return beers.get(0);
+		} else {
+			return null;
 		}
 	}
 	
@@ -92,15 +92,18 @@ public class BeerService {
 	
 	/**
 	 * Konvertiert den json String zu einer Liste von Bier Objekten.
-	 * @param Bier json
+	 * @param jsonString json
 	 * @return Konvertierte Liste
 	 * */
 	private List<Beer> jsonToBeerList(String jsonString) {
 		List<Beer> beers = new ArrayList<>();
 		
 		JSONObject root = new JSONObject(jsonString);
+		if(!root.has("data")){
+			return beers;
+		}
 		JSONArray data = root.getJSONArray("data");
-		
+
 		for (int i = 0; i < data.length(); i++) {
 			JSONObject jsonObject = data.getJSONObject(i);
 			Beer beer = new Beer();
@@ -116,7 +119,7 @@ public class BeerService {
 	
 	/**
 	 * Konvertier den json String zu einer Bierarten map. Key = id, value = name
-	 * @param Bierarten json
+	 * @param jsonString json
 	 * @return Konvertierte Map
 	 * */
 	private Map<Integer, String> jsonToStylesMap(String jsonString) {

@@ -8,9 +8,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Enumeration;
 
+/**
+ * BeerForm enthält ein Gui zum darstellen von Api-Antworten
+ */
 public class BeerForm {
     public JPanel mainPanel;
-    private JList<String> list1;
+    private JList<String> listResults;
     private JButton mainButton;
     private JRadioButton radioButtonAllStyles;
     private JRadioButton radioButtonStyle;
@@ -21,6 +24,9 @@ public class BeerForm {
 
     private BeerService beerService = new BeerService();
 
+    /**
+     *Konstruktor der Klasse BeerForm
+     */
     public BeerForm(){
         ButtonGroup buttonGroup = new ButtonGroup();
         buttonGroup.add(radioButtonAllStyles);
@@ -31,6 +37,7 @@ public class BeerForm {
         mainButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Selektieren Button ausfindig machen
                 AbstractButton selectedButton = null;
                 for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
                     AbstractButton button = buttons.nextElement();
@@ -39,24 +46,40 @@ public class BeerForm {
                     }
                 }
 
-                DefaultListModel<String> list = ((DefaultListModel<String>)list1.getModel());
+                //Model um das hinzufügen von Zeilen zu ermöglichen
+                DefaultListModel<String> list = ((DefaultListModel<String>) listResults.getModel());
+                //Jedes mal zuerst die Liste Leeren
                 list.clear();
                 if(selectedButton == radioButtonAllStyles){
+                    /*
+                     * Erzeugt Guiausgabe der Bierarten.
+                     * Die id wird mit "::" vor dem Bierart Namen ausgeben.
+                     * */
                     beerService.getBeerStyles()
                             .forEach((k, v) -> list.addElement(k + "::" + v));
                 }else if(selectedButton == radioButtonStyle){
+                    /*
+                     *  Erzeugt Guiausgabe der Bierarten, welche die Zeichenfolge ″search″ im Namen enthalten.
+                     *  Die id wird mit "::" vor dem Bierart Namen ausgeben.
+                     *
+                     *  @param searchString Zeichenfolge die enthalten sein soll
+                     * */
                     beerService.getBeerStylesBySearchStr(textFieldArgs.getText())
                             .forEach((k, v) -> list.addElement(k + "::" + v));
                 }else if(selectedButton == radioButtonAllBeers){
+                    /*
+                     * Gibt zeilenweise ID und Name mit "::" getrennt der Biere aus.
+                     * */
                     beerService.getBeers()
                             .forEach(x -> list.addElement((x.getId() + "::" + x.getName())));
                 }else if(selectedButton == radioButtonBeerWithId){
-
-                    System.out.println(textFieldArgs.getText());
-
+                    /*
+                     * Gibt in einer Zeile ID und Namen und in einer zweiten Zeile die Beschreibung
+                     * des entsprechenden Bieres aus.
+                     *
+                     * @param id id nach der gesucht werden soll
+                     * */
                     Beer beer = beerService.getBeerById(textFieldArgs.getText());
-                    // System.out.println(beer.toString());
-
                     if (beer != null) {
                         list.addElement(beer.getId() + "::" + beer.getName());
                     }
