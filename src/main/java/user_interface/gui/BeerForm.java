@@ -51,8 +51,15 @@ public class BeerForm {
                     beerService.getBeers()
                             .forEach(x -> list.addElement((x.getId() + "::" + x.getName())));
                 }else if(selectedButton == radioButtonBeerWithId){
+
+                    System.out.println(textFieldArgs.getText());
+
                     Beer beer = beerService.getBeerById(textFieldArgs.getText());
-                    list.addElement(beer.getId() + "::" + beer.getName());
+                    // System.out.println(beer.toString());
+
+                    if (beer != null) {
+                        list.addElement(beer.getId() + "::" + beer.getName());
+                    }
                 }
             }
         });
