@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="m411-beer-web-service_GUI:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/m411_beer_web_service_GUI</output-path>
+    <root id="archive" name="m411-beer-web-service.jar">
+      <element id="module-output" name="m411-beer-web-service" />
+      <element id="extracted-dir" path="$APPLICATION_HOME_DIR$/redist/forms_rt.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/main/resources/lib/forms_rt.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/main/resources/lib/json-20190722.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/main/resources/lib/jsr311-api-1.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/main/resources/lib/jackson-core-2.9.8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/main/resources/lib/jersey-core-1.19.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/main/resources/lib/jersey-client-1.19.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/main/resources/lib/jackson-databind-2.9.8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/main/resources/lib/jackson-annotations-2.9.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
