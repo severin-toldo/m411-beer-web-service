@@ -13,5 +13,6 @@
 	<classpathentry kind="lib" path="/Users/stoldo/git/m411-beer-web-service/src/main/resources/lib/jersey-core-1.19.1.jar"/>
 	<classpathentry kind="lib" path="/Users/stoldo/git/m411-beer-web-service/src/main/resources/lib/json-20190722.jar"/>
 	<classpathentry kind="lib" path="/Users/stoldo/git/m411-beer-web-service/src/main/resources/lib/jsr311-api-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/stoldo/git/m411-beer-web-service/src/main/resources/lib/forms_rt.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
